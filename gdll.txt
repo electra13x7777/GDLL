@@ -1,0 +1,99 @@
+Title: Generic Doubly Linked Node Documentation
+File: gdll.txt
+Version: gdll_0.1.23
+Author: Alex Barney
+
+1.0) Visual Diagram:
+ _______________________________________________        
+|                                               |
+|          HEAD                  TAIL           |
+|          NODE                  NODE           |
+|                                               |           
+|         **head <-----\_______                 |
+|         _______      |       \_______         |
+|        | GDLN0 |     |       | GDLNn |        |
+| NULL <--       --> GDLN... <--       --> NULL |
+|        | *val  |             | *val  |        |
+|        |__ | __|             |__ | __|        |
+|            |                     |            |
+|            v                     v            |
+|           &mem                  &mem          |
+|_______________________________________________|          
+
+2.0) Documentation:
+    2.1) Description:
+            GDLNode - "Generic" Doubly Linked Node
+        2.1.1) General Design:
+                       GDLNode is a C struct with built in functionality to 
+                   resemble modern generic list structures similar to those 
+                   found in languages like C++, Java, Python, etc. It is built 
+                   so that a "Generic Linked List" is created upon a call to 
+                   createNode(). This function call allocates and instantiates
+                   a head node which will be used as the first point to add 
+                   subsequent nodes to the list. This is acomplished by a call
+                   to appendNode().
+        2.1.2) Purpose:
+                       C has no built in support for generics, dynamic lists,
+                   or linked data structures. This can be intimidating for
+                   those who are used to the modern concept of standard
+                   containers (LinkedLists, Maps/AsociativeArrays, etc). This
+                   Library aims to assist those who do not wish to write a data
+                   structure for every 'specific' data storage need. It is very
+                   good at storing smaller amounts of data that the programmer
+                   will be able to access quickly and know where it is the 
+                   entire time they have GDLNodes allocated.
+    2.2) API:
+            GDLNode - Struct Members and Functions
+        2.2.1) Struct GDLNode Members:
+                    ____________________________
+                   |__Member__|_______Type______|
+                   |   index  |  unsigned int   |
+                   |   prev   | struct GDLNode* |
+                   |   next   | struct GDLNode* |
+                   |   head   | struct GDLNode**|
+                   |   val    |      void*      |
+                   |__________|_________________|
+        
+        2.2.2) Member Description:
+                  index - index of node within GDLNode sequence
+                   prev - Pointer to the previous GDLNode : NULL if head node
+                   next - Pointer to the next GDLNode : NULL if tail node
+                   head - Pointer to the address of the head GDLNode
+                    val - Pointer to a value of unspecified type
+        
+        2.2.3) Functions:           
+                    ______________________________
+                   |__Function__|____ReturnType___|
+                   |            |                 |
+                   | createNode | struct GDLNode* |
+                   | appendNode | struct GDLNode* |
+                   | removeNode |      void       |
+                   | destroyList|      void       |
+                   |____________|_________________|
+
+        2.2.4) Function Description:
+                   struct GDLNode* createNode(void *val)
+                       Notes: createNode() is the main call to begin a GDLL.
+                              It will instantiate and allocate a GDLNode
+                              that will act as the head node of the list. 
+                              Calling createNode() will point the <val> to 
+                              whatever is passed into the params and set 
+                              <prev> and <next> to NULL. createNode() will
+                              return the GDLNode when the subroutine concludes.
+                   
+                   struct GDLNode* appendNode(struct GDLNode *node, void *val)
+                       Notes: appendNode() will create and link a new GDLNode
+                              to another GDLNode. GDLNodes can be appended
+                              both at the tail of the linked sequence or 
+                              inserted into the position of an existing node.
+3.0) Revisions
+    gdll_0.1.23: 
+    BUILD DATE: 01/31/2019
+        + indexing of GDLNode sequences
+    gdll_0.1.2: 
+    BUILD DATE: 01/31/2019
+        + pointer to head GDLNode
+        + txt file
+    gdll_0.1.0: 
+    BUILD DATE: 01/29/2019
+        + initial build                            
