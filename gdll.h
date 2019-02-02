@@ -4,7 +4,7 @@
 // Description: Header file defining generic doubly linked data structure
 
 // Struct: GDLNode
-// Version: gdll_0.1.23
+// Version: gdll_0.1.3
 //
 // Description: Doubly Linked Data Structure that
 struct GDLNode
@@ -27,17 +27,15 @@ struct GDLNode* createNode(void *val);
 //              position of the node passed in
 struct GDLNode* appendNode(struct GDLNode *node, void *val);
 
-
-///////////////////////////////////////////////////////////////////////////////
-/*------------------------------NEED TO BE TESTED----------------------------*/
-///////////////////////////////////////////////////////////////////////////////
-
 // Function: removeNode
 //
 // Description: Removes and frees a node from the linked structure and 
 //              reconstructs the data structure
 void removeNode(struct GDLNode *node);
 
+// Function: deleteList
+//
+// Description: Removes all instances of GDLNode from a linked sequence
 void destroyList(struct GDLNode *node);
 
 ///////////////////////////////////////////////////////////////////////////////

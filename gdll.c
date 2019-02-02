@@ -50,44 +50,56 @@ struct GDLNode* appendNode(struct GDLNode *node, void *val)
     return newnode;
 }
 
-    
-/*
 void removeNode(struct GDLNode *node)
 {
-    if(node->next != NULL)
+    if(node->next != NULL) 
     {
+        node->prev->next = NULL;
         node->prev->next = node->next;
+        node->next->prev = NULL;
+        node->next->prev = node->prev;
+        printf("FREE: %p : %d\n", node, node->index);
     }
+    else if(&node == node->head)
+    {
+        free(node);
+    }
+    else
+    {
+        if(node->prev != NULL)
+        {
+            node->prev->next = NULL;
+        }
+        printf("FREE: %p : %d\n", node, node->index);
+    }
+    updateIndex(node);
     free(node);
 }
-*/
 
-/*
 void destroyList(struct GDLNode *node)
 {
-    while(node != NULL)
+    while(node->next != NULL)
     {
         node = node->next;
-        if(node->next == NULL && node->prev != NULL)
-        {
-            node = node->prev;
-            free(node->next);
-            node->next = NULL
-        }
-        else if(node->next == NULL && node->prev == NULL)
-        {
-            free(node);
-        }
+        printf("%p : %d\n", node, node->index);
+    }
+    printf("\n");
+    while(node != NULL)
+    {
+        printf("%p : %d\n", node, node->index);
+        removeNode(node);
+        node = node->prev;
     }
 }
-*/
+
 void printContents(struct GDLNode *gdll)
 {
     while(gdll != NULL)
     {
-        printf("%p\n", gdll->val);
+        printf("[%p : %d]\n", gdll->val, gdll->index);
         gdll = gdll->next;
     }
+    printf("\n");
 }
 
 /*TESTS*/
@@ -108,21 +120,32 @@ void test()
             nullN->next->val, pthd->next->val);
     
     printContents(head);
-    printf("\n");
-    //destroyList(head);
-
+    destroyList(head);
+    
     /*
+    removeNode(tail);
+    printContents(head);
+    removeNode(pthd);
+    printContents(head);
     removeNode(nullN);
-    removeNode(strN);
+    printContents(head);
     removeNode(integerN);
+    printContents(head);
+    removeNode(strN);
+    printContents(head);
     removeNode(head);
     */
+
+    /*
     free(tail);
     free(pthd);
     free(nullN);
     free(strN);
     free(integerN);
     free(head);
+    */
+    //destroyList(head);
+    //printf("%c\n", head->*head->val);
 }
 /*
 void test2()
@@ -136,6 +159,20 @@ void test2()
     free(n);
 }
 */
+
+void testrem()
+{
+    struct GDLNode *head = createNode('a');
+    struct GDLNode *integerN = appendNode(head, 8);
+    struct GDLNode *strN = appendNode(head, "string");
+    struct GDLNode *nullN = appendNode(integerN, 7777777);
+
+    printContents(head);
+    printf("\n");
+    removeNode(strN);
+    printContents(head);
+}
+
 int main()
 {
     test();

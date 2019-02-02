@@ -1,6 +1,6 @@
 Title: Generic Doubly Linked Node Documentation
 File: gdll.txt
-Version: gdll_0.1.23
+Version: gdll_0.1.3
 Author: Alex Barney
 
 1.0) Visual Diagram:
@@ -16,8 +16,8 @@ Author: Alex Barney
 |        | *val  |             | *val  |        |
 |        |__ | __|             |__ | __|        |
 |            |                     |            |
-|            v                     v            |
-|           &mem                  &mem          |
+|    index   v                     v     index  |
+|      0    &mem                  &mem     n    |
 |_______________________________________________|          
 
 2.0) Documentation:
@@ -47,6 +47,7 @@ Author: Alex Barney
         2.2.1) Struct GDLNode Members:
                     ____________________________
                    |__Member__|_______Type______|
+                   |          |                 |
                    |   index  |  unsigned int   |
                    |   prev   | struct GDLNode* |
                    |   next   | struct GDLNode* |
@@ -63,7 +64,7 @@ Author: Alex Barney
         
         2.2.3) Functions:           
                     ______________________________
-                   |__Function__|____ReturnType___|
+                   |__Function__|___Return Type___|
                    |            |                 |
                    | createNode | struct GDLNode* |
                    | appendNode | struct GDLNode* |
@@ -72,6 +73,7 @@ Author: Alex Barney
                    |____________|_________________|
 
         2.2.4) Function Description:
+                   
                    struct GDLNode* createNode(void *val)
                        Notes: createNode() is the main call to begin a GDLL.
                               It will instantiate and allocate a GDLNode
@@ -86,7 +88,26 @@ Author: Alex Barney
                               to another GDLNode. GDLNodes can be appended
                               both at the tail of the linked sequence or 
                               inserted into the position of an existing node.
+                              This will also update the index values of
+                              GDLNodes that have their position changed in the
+                              process.
+
+                   void removeNode(GDLNode *node)
+                       Notes: removeNode() removes an individual node from the
+                              linked sequence of GDLNodes, re-links any nodes
+                              that are decoupled in the process, and frees any
+                              allocated memory for the node removed. This will
+                              also update the index values of GDLNodes that 
+                              have their position changed in the process.
+
+                   void deleteList(GDLNode *node)
+                       Notes: deleteList() dynamically removes all GDLNode
+                              instances in a linked sequence. 
 3.0) Revisions
+    gdll_0.1.3
+    BUILD DATE: 02/01/2019
+        + removeNode()
+        + deleteList() 
     gdll_0.1.23: 
     BUILD DATE: 01/31/2019
         + indexing of GDLNode sequences
