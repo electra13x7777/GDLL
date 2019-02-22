@@ -16,6 +16,10 @@ struct GDLNode
     void *val; // Void Pointer to the value stored in the list
 };
 
+///////////////////////////////////////////////////////////////////////////////
+/*------------------------------NODE INSTANTIATON----------------------------*/
+///////////////////////////////////////////////////////////////////////////////
+
 // Function: createNode
 //
 // Description: Instantiates a head node with no linked nodes
@@ -27,9 +31,13 @@ struct GDLNode* createNode(void *val);
 //              position of the node passed in
 struct GDLNode* appendNode(struct GDLNode *node, void *val);
 
+///////////////////////////////////////////////////////////////////////////////
+/*--------------------------------NODE REMOVAL-------------------------------*/
+///////////////////////////////////////////////////////////////////////////////
+
 // Function: removeNode
 //
-// Description: Removes and frees a node from the linked structure and 
+// Description: Removes and frees a node from the linked structure and
 //              reconstructs the data structure
 void removeNode(struct GDLNode *node);
 

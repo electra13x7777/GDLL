@@ -31,7 +31,9 @@ Author: Alex Barney
                    createNode(). This function call allocates and instantiates
                    a head node which will be used as the first point to add 
                    subsequent nodes to the list. This is acomplished by a call
-                   to appendNode().
+                   to appendNode(). Any element in the linked sequence can
+                   easily be removed with a call to removeNode(). The entire
+                   sequence can be destroyed with a call to destroyList().
         2.1.2) Purpose:
                        C has no built in support for generics, dynamic lists,
                    or linked data structures. This can be intimidating for
